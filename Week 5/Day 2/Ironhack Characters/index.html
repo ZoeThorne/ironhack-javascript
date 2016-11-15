@@ -1,0 +1,35 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Characters</title>
+
+</head>
+
+<body>
+<h1 class="complex-heading">
+  HTTP Requests in JavaScript
+  <span>a.k.a. AJAX</span>
+  <em> (Now with added jQuery!) </em>
+</h1>
+
+<button class="js-fetch-characters">Fetch characters</button>
+
+<ul class="js-character-list"></ul>
+
+<h3>Add a new character</h3>
+
+<form id="newChar" action="index.html" method="POST">
+  Name: <input type="text" name="name" id="name"><br>
+  Occupation: <input type="text" name="occupation" id="occupation"><br>
+  Weapon: <input type="text" name="weapon" id="weapon"><br>
+  <button id="submit" type="submit" name="button">Submit</button>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>
