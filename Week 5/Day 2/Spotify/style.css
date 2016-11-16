@@ -1,0 +1,116 @@
+body {
+	margin: 0;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+/* Header */
+
+.title-bar {
+	background-color: #8325a3;
+	color: white;
+	text-align: center;
+	font-family: 'Shrikhand', cursive;
+	padding: 10px;
+}
+
+.artist-search {
+	color: black;
+	display: inline-block;
+}
+
+button.hover {
+	background-color: #d7a7e8;
+}
+
+/* Main section */
+
+.display {
+	margin-top: 0;
+	background-color: #d7a7e8;
+}
+
+.js-album-list {
+	float: right;
+	background-color: black;
+	margin-right: 60px;
+	color: white;
+	display: inline-block;
+	max-width: 60%;
+}
+
+h2 {
+	text-align: center;
+}
+
+.js-artist-list {
+	background-color: #b1c3e0;
+	padding-left: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
+	float: left;
+}
+
+.js-track-list {
+	list-style-type:decimal;
+}
+
+.artist-display {
+	padding-top: 10px;
+	list-style-type: none;
+	text-align: center;
+}
+
+.album-display {
+	padding: 30px;
+	display: inline-block;
+	width: 30%;
+	text-align: center;
+}
+
+/* Footer */
+
+.footer {
+	background-color: #8325a3;
+	color: white;
+	text-align: center;
+	font-family: 'Shrikhand', cursive;
+	padding: 10px;
+}
+
+/* Images */
+
+.get-albums /* Artist pics */ {
+	width: 150px;
+	border-radius: 5px;
+	border: 2px solid black;
+	-webkit-transition: width 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: width 0.5s;
+}
+
+.get-albums:hover {
+	border: 3px solid white;
+	cursor:pointer;
+	width: 180px;
+}
+
+.get-tracks /* Album pics */ {
+	width: 120px;
+	border-radius: 50%;
+	-webkit-transition: -webkit-transform 1s ease-in-out;
+    transition:         transform 1s ease-in-out;
+}
+
+.get-tracks:hover {
+	border: 3px solid white;
+	cursor:pointer;
+	-ms-transform: rotate(720deg); /* IE 9 */
+    -webkit-transform: rotate(720deg); /* Chrome, Safari, Opera */
+    transform: rotate(720deg);
+}
+
+
+/* Modal */
+
+.modal-dialog {
+	width: 500px;
+}

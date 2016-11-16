@@ -1,24 +1,48 @@
+// Object-oriented version
 
-function search(){
+function Artist(){};
+function Album(){};
+function Track(){};
+
+function Splotify(){
+	this.artist = new Artist();
+	this.album = new Album();
+	this.track = new Track();
+}
+
+// Page functions
+
+Splotify.prototype.handleError = function(error){
+	console.log("Error");
+	console.log(error.responseText); 
+}
+
+
+// Artist functions
+
+Artist.prototype.search = function(){
+	var self = this
 	$('.artist-search').submit(function(event){
 		$('.js-artist-list').empty();
+		$('.js-album-list').empty();
 		event.preventDefault();
 		var artist = $('#artist').val();
-		getArtistsFromAjax(artist);	
+		self.getArtistsFromAjax(artist);	
 		$('input').val('');
 	});
 };
 
-function getArtistsFromAjax(artist){
+
+Artist.prototype.getArtistsFromAjax = function(artist){
 	$.ajax({
 		type: "GET", 
 		url: "https://api.spotify.com/v1/search?type=artist&query="+artist,
-		success: showArtists, 
-		error: handleError
+		success: this.showArtists, 
+		error: splotify.handleError
 	});
 };
 
-function showArtists(response){
+Artist.prototype.showArtists = function(response){
 	var artistArray = response ;
 	$.each(artistArray.artists.items,function (index, artist){
 		if (artist.images.length > 0) {
@@ -34,29 +58,28 @@ function showArtists(response){
 	});
 };
 
-function handleError(error){
-	console.log("Error");
-	console.log(error.responseText); 
-}
 
-function getAlbums(){
+// Album functions
+
+Album.prototype.getAlbums = function(){
+	var self = this
 	$(document).on('click', '.get-albums', function (event){
 		event.preventDefault();
 		var id = this.id;
-		getAlbumsFromAjax(id);
+		self.getAlbumsFromAjax(id);
 	});
 }
 
-function getAlbumsFromAjax(id){
+Album.prototype.getAlbumsFromAjax = function(id){
 	$.ajax({
 		type: "GET", 
 		url: "https://api.spotify.com/v1/artists/"+id+"/albums",
-		success: showAlbums, 
-		error: handleError
+		success: this.showAlbums, 
+		error: splotify.handleError
 	});
 };
 
-function showAlbums(response){
+Album.prototype.showAlbums = function(response){
 	var albumArray = response;
 	$('.js-album-list').empty();
 	$.each(albumArray.items,function (index, album){
@@ -69,28 +92,34 @@ function showAlbums(response){
 				`;
 		
 			$('.js-album-list').append(html);
+			$('.js-album-list span:last').hide().fadeIn(500);
 		
 	});
+	$('.js-album-list').prepend("<h2>Albums</h2>");
 };
 
-function getTracks(){
+
+// Track functions
+
+Track.prototype.getTracks = function(){
+	var self = this
 	$(document).on('click', '.get-tracks', function (event){
 		event.preventDefault();
 		var trackId = this.id;
-		getTracksFromAjax(trackId);
+		self.getTracksFromAjax(trackId);
 	});
 }
 
-function getTracksFromAjax(trackId){
+Track.prototype.getTracksFromAjax = function(trackId){
 	$.ajax({
 		type: "GET", 
 		url: "https://api.spotify.com/v1/albums/"+trackId+"/tracks",
-		success: showTracks, 
-		error: handleError
+		success: this.showTracks, 
+		error: splotify.handleError
 	});
 };
 
-function showTracks(response){
+Track.prototype.showTracks = function(response){
 	var trackArray = response;
 	$('.js-track-list').empty();
 	$('#myModal').modal()
@@ -109,9 +138,9 @@ function showTracks(response){
 };
 
 
+// Calls
 
-$(document).on('ready', function () {
-	search();
-	getAlbums();
-	getTracks();
-});
+var splotify = new Splotify();
+splotify.artist.search();
+splotify.album.getAlbums();
+splotify.track.getTracks();
