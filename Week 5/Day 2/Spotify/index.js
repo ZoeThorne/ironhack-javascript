@@ -1,3 +1,4 @@
+// Old version
 
 function search(){
 	$('.artist-search').submit(function(event){

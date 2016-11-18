@@ -1,5 +1,5 @@
 class PokemonApi
-  POKEMON_API_URL = "http://pokeapi.co/api/v2"
+  POKEMON_API_URL = "http://pokeapi.co/api/v1"
   REQUEST_DEFAULTS = { :parse? => true }
 
   def self.uri(path)

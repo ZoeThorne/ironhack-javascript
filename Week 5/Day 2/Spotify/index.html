@@ -20,6 +20,7 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 </head>
 
@@ -45,11 +46,32 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Track List</h4>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+        <div class=" container-fluid player-screen pre-scrollable">
+          <div class="col-12-lg">
+            <div class=" row metadata">
+              <p class="title">Track Title</p>
+              <p class="author">Artist</p>
+
+              <div class="seekbar">
+                <progress value="0" max="30"></progress>
+              </div>
+            </div>
+            <div class="js-track-list"></div>
+          </div>
+          <!-- <h4 class="modal-title" id="myModalLabel">Track List</h4> -->
+        </div>
       </div>
       <div class="modal-body">
-        <div class="js-track-list"></div>
+                <!-- Player -->
+        <div class="widget">
+        <div class="btn-play disabled"></div>
+        <audio></audio>
+        </div>
+
+        <!-- End of player -->
+        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

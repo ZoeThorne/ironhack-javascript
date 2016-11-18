@@ -17,6 +17,30 @@ Splotify.prototype.handleError = function(error){
 	console.log(error.responseText); 
 }
 
+Splotify.prototype.printTime = function() {
+  var current = $('audio').prop('currentTime');
+  $("progress").attr("value", current);
+}
+
+Splotify.prototype.playTrack = function(){
+	$('.btn-play').click(function() {
+		if ($('.btn-play').hasClass("disabled")){
+			$('audio').trigger('play');
+			$('.btn-play').removeClass("disabled");
+			$('.btn-play').addClass("playing");
+		} else {
+			$('audio').trigger('pause');
+			$('.btn-play').removeClass("playing");
+			$('.btn-play').addClass("disabled");
+		}
+		
+		$('audio').on('timeupdate', splotify.printTime);
+
+  		
+	});
+}
+
+
 
 // Artist functions
 
@@ -124,9 +148,9 @@ Track.prototype.showTracks = function(response){
 	$('.js-track-list').empty();
 	$('#myModal').modal()
 		$.each(trackArray.items,function (index, track){
+
 		var html = ` 
-				<li>
-					<a href="${track.preview_url}" target="_blank">${track.name}</a>
+				<li class="track-player" id="${track.preview_url}/${track.name}">${track.name}
 										
 				</li><br>
 				`;
@@ -134,8 +158,30 @@ Track.prototype.showTracks = function(response){
 			$('.js-track-list').append(html);
 		
 	});
-
+		
+		var firstTrack = trackArray.items[0]
+		$("audio").attr("src", firstTrack.preview_url);
+		$(".title").html(firstTrack.name);
+		$(".author").html(firstTrack.artists[0].name);
 };
+
+
+Track.prototype.changeTrack = function(){
+	var self = this
+	$(document).on('click', '.track-player', function (event){
+		event.preventDefault();
+		var info = this.id;
+		var trackUrl = info.substring(0, info.lastIndexOf("/") + 1).slice(0,-1);
+		var trackTitle = info.substring(info.lastIndexOf("/") + 1, info.length);
+		console.log(trackUrl);
+		console.log(trackTitle);
+		$("audio").attr("src", trackUrl);
+		$(".title").html(trackTitle);
+	});
+}
+
+
+
 
 
 // Calls
@@ -144,3 +190,6 @@ var splotify = new Splotify();
 splotify.artist.search();
 splotify.album.getAlbums();
 splotify.track.getTracks();
+splotify.track.changeTrack();
+splotify.playTrack();
+
